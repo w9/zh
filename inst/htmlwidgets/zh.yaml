@@ -1,0 +1,6 @@
+dependencies:
+ - name: zh
+   version: 0.0.0
+   src: htmlwidgets/zh
+   script: ZH.js
+   stylesheet: ZH.css

@@ -1,0 +1,7 @@
+#heatmap-display {
+  image-rendering: pixelated;
+}
+
+.scrollable {
+  overflow: auto;
+}
