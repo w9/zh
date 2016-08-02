@@ -8,3 +8,7 @@ the heatmap. This bitmap is then encoded as base64 and embedded in an `<image>`
 tag in an SVG.
 
 You browser won't break a sweat even with a 10-million square heatmap.
+
+![](https://github.com/w9/w9.github.io/blob/master/zh-screenshot-1.png)
+
+![](https://github.com/w9/w9.github.io/blob/master/zh-screenshot-2.png)
