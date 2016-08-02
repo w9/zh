@@ -1,7 +1,26 @@
-#heatmap-display {
-  image-rendering: pixelated;
-}
-
 .scrollable {
   overflow: auto;
+  position: relative;
+}
+
+#zh-container {
+}
+
+#zh-svg {
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.zh-label {
+  font-size: 8.80pt;
+  font-family: Arial;
+  fill: #4D4D4D;
+  text-anchor: end;
+  alignment-baseline: middle;
+}
+
+.zh-rotate {
+  transform: rotate(90deg);
 }

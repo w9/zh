@@ -4,8 +4,8 @@
 \alias{zh}
 \title{ZH: Fast heatmap plotter as an HTML widget}
 \usage{
-zh(mat, preserve_order = T, use_viewer = F, pixel_width = 5,
-  pixel_height = 5)
+zh(mat, preserve_order = T, use_viewer = F, display_rownames = T,
+  display_colnames = T, pixel_width = 4, pixel_height = 4)
 }
 \description{
 ZH: Fast heatmap plotter as an HTML widget

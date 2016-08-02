@@ -2,5 +2,7 @@ dependencies:
  - name: zh
    version: 0.0.0
    src: htmlwidgets/zh
-   script: ZH.js
+   script:
+     - lib/svg.min.js
+     - ZH.js
    stylesheet: ZH.css

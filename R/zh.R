@@ -31,7 +31,14 @@
 
 # asdfasf -----------------------------------------------------------------
 
-zh <- function(mat, preserve_order=T, use_viewer=F, pixel_width=5, pixel_height=5) {
+zh <-
+  function(mat,
+           preserve_order=T,
+           use_viewer=F,
+           display_rownames=T,
+           display_colnames=T,
+           pixel_width=4,
+           pixel_height=4) {
   col_mapper <- col_numeric(c('#132B43', '#56B1F7'), c(min(mat), max(mat)))
   
   d_names_list <- dimnames(mat)
@@ -53,8 +60,12 @@ zh <- function(mat, preserve_order=T, use_viewer=F, pixel_width=5, pixel_height=
   
   msg <- list()
   msg$base64 <- heatmap_64
+  msg$rownames <- rownames(mat)
+  msg$colnames <- colnames(mat)
   msg$nrow <- nrow(mat)
   msg$ncol <- ncol(mat)
+  msg$display_rownames <- display_rownames
+  msg$display_colnames <- display_colnames
   msg$pixel_width <- pixel_width
   msg$pixel_height <- pixel_height
   
