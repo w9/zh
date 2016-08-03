@@ -1,3 +1,5 @@
+# TODO: by default show the entire thing and click to zoom in
+
 #' ZH: Fast heatmap plotter as an HTML widget
 #'
 #' @import htmlwidgets
@@ -14,6 +16,7 @@
 #' @import purrr
 #'
 #' @export
+
 
 
 #library( htmlwidgets )
