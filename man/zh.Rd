@@ -5,7 +5,9 @@
 \title{ZH: Fast heatmap plotter as an HTML widget}
 \usage{
 zh(mat, preserve_order = T, use_viewer = F, display_rownames = T,
-  display_colnames = T, pixel_width = 4, pixel_height = 4)
+  display_colnames = T, label_margin = 10, pixel_width_with_no_text = 4,
+  pixel_height_with_no_text = 4, pixel_width_with_text = 15,
+  pixel_height_with_text = 15)
 }
 \description{
 ZH: Fast heatmap plotter as an HTML widget
