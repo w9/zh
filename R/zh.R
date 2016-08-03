@@ -67,7 +67,7 @@ zh <-
 
     svg <- read_xml('<svg id="zh-svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" />')
     img <- read_xml('<image />')
-    xml_attr(img, 'id') <- 'zh-svg'
+    xml_attr(img, 'id') <- 'zh-heatmap'
     xml_attr(img, 'href') <- heatmap_64
     xml_attr(img, 'height') <- (nrow(mat) * pixel_height) %>% as.character
     xml_attr(img, 'width') <- (ncol(mat) * pixel_width) %>% as.character
@@ -86,7 +86,6 @@ zh <-
     if (display_rownames && !is.null(rownames)) {
       for (i in 1:length(rownames)) {
         text <- read_xml('<text />')
-        xml_attr(text, 'id') <- 'zh-svg'
         xml_attr(text, 'x') <- (- label_margin) %>% as.character
         xml_attr(text, 'y') <- ((i - 1 + 0.5) * pixel_height_with_text) %>% as.character
         xml_attr(text, 'class') <- 'zh-label'
@@ -100,7 +99,6 @@ zh <-
     if (display_colnames && !is.null(colnames)) {
       for (i in 1:length(colnames)) {
         text <- read_xml('<text />')
-        xml_attr(text, 'id') <- 'zh-svg'
         xml_attr(text, 'x') <- (- label_margin) %>% as.character
         xml_attr(text, 'y') <- (-(i - 1 + 0.5) * pixel_width_with_text) %>% as.character
         xml_attr(text, 'class') <- 'zh-label'
@@ -113,15 +111,14 @@ zh <-
     
     msg <- list()
     msg$svg <- svg %>% as.character
-    #msg$base64 <- heatmap_64
-    #msg$rownames <- rownames(mat)
-    #msg$colnames <- colnames(mat)
-    #msg$nrow <- nrow(mat)
-    #msg$ncol <- ncol(mat)
+    msg$rownames <- rownames(mat)
+    msg$colnames <- colnames(mat)
+    msg$nrow <- nrow(mat)
+    msg$ncol <- ncol(mat)
     #msg$display_rownames <- display_rownames
     #msg$display_colnames <- display_colnames
-    #msg$pixel_width <- pixel_width
-    #msg$pixel_height <- pixel_height
+    msg$pixel_width <- pixel_width
+    msg$pixel_height <- pixel_height
     
     sizing_policy <- sizingPolicy(padding=0, browser.fill=T, viewer.suppress=!use_viewer)
     createWidget('zh', msg, sizingPolicy=sizing_policy)

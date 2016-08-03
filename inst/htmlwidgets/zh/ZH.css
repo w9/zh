@@ -3,6 +3,11 @@
   position: relative;
 }
 
+.zh-outline {
+  stroke: #fff;
+  fill: none;
+}
+
 #zh-container {
 }
 
