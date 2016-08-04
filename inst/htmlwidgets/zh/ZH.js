@@ -46,7 +46,7 @@ ZH.ZH = function(el_) {
     svg.setAttribute('viewBox', [bbox.x, bbox.y, bbox.width, bbox.height].join(' '));
     svg.setAttribute('width', el_.clientWidth);
     svg.setAttribute('height', el_.clientHeight);
-    svgPanZoom(_svg);
+    svgPanZoom(_svg, { maxZoom: Infinity });
   };
   this.plot = _plot;
 };
