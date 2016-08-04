@@ -65,8 +65,7 @@ ZH.ZH = function(el_) {
     bbox.height += 2 * ZH.MARGIN;
 
     svg.setAttribute('viewBox', [bbox.x, bbox.y, bbox.width, bbox.height].join(' '));
-    svg.setAttribute('width', '100%');
-    svg.setAttribute('height', '100%');
+    _resize();
 
     window.addEventListener('keydown', function(e){
       switch (e.key) {
@@ -81,23 +80,23 @@ ZH.ZH = function(el_) {
   var _resize = function() {
     switch (_zoom_level) {
       case 1:
-        svg.setAttribute('width', bbox.width);
-        svg.setAttribute('height', bbox.height);
+        _svg.setAttribute('width', bbox.width);
+        _svg.setAttribute('height', bbox.height);
         break;
 
       case 2:
-        svg.setAttribute('width', '100%');
-        svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
+        _svg.setAttribute('width', '100%');
+        _svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
         break;
 
       case 3:
-        svg.setAttribute('width', '50%');
-        svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
+        _svg.setAttribute('width', '50%');
+        _svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
         break;
 
       case 4:
-        svg.setAttribute('height', '100%');
-        svg.setAttribute('width', bbox.width * svg.clientWidth / bbox.height);
+        _svg.setAttribute('height', '100%');
+        _svg.setAttribute('width', bbox.width * svg.clientWidth / bbox.height);
         break;
     }
   };
