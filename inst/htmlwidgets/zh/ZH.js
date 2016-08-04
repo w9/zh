@@ -74,6 +74,9 @@ ZH.ZH = function(el_) {
         svg.setAttribute('width', '100%');
         svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
       } else if (e.key == '3') {
+        svg.setAttribute('width', '50%');
+        svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
+      } else if (e.key == '4') {
         svg.setAttribute('height', '100%');
         svg.setAttribute('width', bbox.width * svg.clientWidth / bbox.height);
       }
