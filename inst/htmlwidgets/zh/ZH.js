@@ -88,10 +88,12 @@ ZH.ZH = function(el_) {
       case 2:
         _svg.setAttribute('width', '100%');
         _svg.setAttribute('height', _bbox.height * _svg.clientWidth / _bbox.width);
+        _svg.setAttribute('height', _bbox.height * _svg.clientWidth / _bbox.width);
         break;
 
       case 3:
         _svg.setAttribute('width', '50%');
+        _svg.setAttribute('height', _bbox.height * _svg.clientWidth / _bbox.width);
         _svg.setAttribute('height', _bbox.height * _svg.clientWidth / _bbox.width);
         break;
 
