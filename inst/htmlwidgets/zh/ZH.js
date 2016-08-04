@@ -12,6 +12,10 @@ ZH.ZH = function(el_) {
   _container.id = 'zh-container';
   el_.appendChild(_container);
 
+  var _col_outline = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  _col_outline.classList.add('zh-outline');
+  _col_outline.hidden = true;
+
   var _row_outline = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
   _row_outline.classList.add('zh-outline');
   _row_outline.hidden = true;
@@ -29,11 +33,18 @@ ZH.ZH = function(el_) {
     _heatmap.addEventListener('click', function(e){
       let ii = Math.floor(e.offsetX / msg_.pixel_width);
       let jj = Math.floor(e.offsetY / msg_.pixel_height);
+
       _row_outline.setAttribute('x', -0.5);
       _row_outline.setAttribute('y', -0.5 + jj * msg_.pixel_height);
       _row_outline.setAttribute('width', 1 + msg_.pixel_width * msg_.ncol);
       _row_outline.setAttribute('height', 1 + msg_.pixel_height);
       _row_outline.hidden = false;
+
+      _col_outline.setAttribute('x', -0.5 + jj * msg_.pixel_height);
+      _col_outline.setAttribute('y', -0.5);
+      _col_outline.setAttribute('width', 1 + msg_.pixel_width);
+      _col_outline.setAttribute('height', 1 + msg_.pixel_height * msg_.ncol);
+      _col_outline.hidden = false;
     });
     
     // aways crop the svg to the bounding box plus a margin
