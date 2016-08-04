@@ -41,7 +41,7 @@ ZH.ZH = function(el_) {
       _row_outline.setAttribute('height', 1 + msg_.pixel_height);
       _row_outline.hidden = false;
 
-      _col_outline.setAttribute('x', -0.5 + jj * msg_.pixel_height);
+      _col_outline.setAttribute('x', -0.5 + ii * msg_.pixel_height);
       _col_outline.setAttribute('y', -0.5);
       _col_outline.setAttribute('width', 1 + msg_.pixel_width);
       _col_outline.setAttribute('height', 1 + msg_.pixel_height * msg_.ncol);
