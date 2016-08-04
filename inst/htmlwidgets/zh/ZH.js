@@ -28,6 +28,7 @@ ZH.ZH = function(el_) {
 
     _svg = document.getElementById('zh-svg');
     _svg.appendChild(_row_outline);
+    _svg.appendChild(_col_outline);
 
     _heatmap = document.getElementById('zh-heatmap');
     _heatmap.addEventListener('click', function(e){
