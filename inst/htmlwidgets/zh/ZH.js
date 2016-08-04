@@ -63,14 +63,19 @@ ZH.ZH = function(el_) {
     bbox.height += 2 * ZH.MARGIN;
 
     svg.setAttribute('viewBox', [bbox.x, bbox.y, bbox.width, bbox.height].join(' '));
-    svg.setAttribute('width', el_.clientWidth);
-    svg.setAttribute('height', el_.clientHeight);
-    let _pan_zoom = svgPanZoom(_svg, { maxZoom: Infinity });
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '100%');
 
     window.addEventListener('keydown', function(e){
-      if (e.key == 'Home') {
-        svg.setAttribute('viewBox', [bbox.x, bbox.y, bbox.width, bbox.y].join(' '));
-        _pan_zoom.reset();
+      if (e.key == '1') {
+        svg.setAttribute('width', bbox.width);
+        svg.setAttribute('height', bbox.height);
+      } else if (e.key == '2') {
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
+      } else if (e.key == '3') {
+        svg.setAttribute('height', '100%');
+        svg.setAttribute('width', bbox.width * svg.clientWidth / bbox.height);
       }
     });
   };
