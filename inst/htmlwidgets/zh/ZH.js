@@ -9,6 +9,7 @@ ZH.ZH = function(el_) {
   el_.classList.add('scrollable');
 
   var _zoom_level = 3;
+  var _bbox;
 
   var _container = document.createElement('div');
   _container.id = 'zh-container';
@@ -58,13 +59,13 @@ ZH.ZH = function(el_) {
     
     // aways crop the svg to the bounding box plus a margin
     let svg = document.getElementById('zh-svg');
-    let bbox = svg.getBBox();
-    bbox.x -= ZH.MARGIN;
-    bbox.y -= ZH.MARGIN;
-    bbox.width += 2 * ZH.MARGIN;
-    bbox.height += 2 * ZH.MARGIN;
+    _bbox = svg.getBBox();
+    _bbox.x -= ZH.MARGIN;
+    _bbox.y -= ZH.MARGIN;
+    _bbox.width += 2 * ZH.MARGIN;
+    _bbox.height += 2 * ZH.MARGIN;
 
-    svg.setAttribute('viewBox', [bbox.x, bbox.y, bbox.width, bbox.height].join(' '));
+    _svg.setAttribute('viewBox', [_bbox.x, _bbox.y, _bbox.width, _bbox.height].join(' '));
     _resize();
 
     window.addEventListener('keydown', function(e){
@@ -80,23 +81,23 @@ ZH.ZH = function(el_) {
   var _resize = function() {
     switch (_zoom_level) {
       case 1:
-        _svg.setAttribute('width', bbox.width);
-        _svg.setAttribute('height', bbox.height);
+        _svg.setAttribute('width', _bbox.width);
+        _svg.setAttribute('height', _bbox.height);
         break;
 
       case 2:
         _svg.setAttribute('width', '100%');
-        _svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
+        _svg.setAttribute('height', _bbox.height * svg.clientWidth / _bbox.width);
         break;
 
       case 3:
         _svg.setAttribute('width', '50%');
-        _svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
+        _svg.setAttribute('height', _bbox.height * svg.clientWidth / _bbox.width);
         break;
 
       case 4:
         _svg.setAttribute('height', '100%');
-        _svg.setAttribute('width', bbox.width * svg.clientWidth / bbox.height);
+        _svg.setAttribute('width', _bbox.width * svg.clientWidth / _bbox.height);
         break;
     }
   };
