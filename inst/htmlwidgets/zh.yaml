@@ -4,5 +4,6 @@ dependencies:
    src: htmlwidgets/zh
    script:
      - lib/svg.min.js
+     - lib/svg-pan-zoom.min.js
      - ZH.js
    stylesheet: ZH.css

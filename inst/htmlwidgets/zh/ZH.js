@@ -44,8 +44,9 @@ ZH.ZH = function(el_) {
     bbox.width += 2 * ZH.MARGIN;
     bbox.height += 2 * ZH.MARGIN;
     svg.setAttribute('viewBox', [bbox.x, bbox.y, bbox.width, bbox.height].join(' '));
-    svg.setAttribute('width', bbox.width);
-    svg.setAttribute('height', bbox.height);
+    svg.setAttribute('width', el_.clientWidth);
+    svg.setAttribute('height', el_.clientHeight);
+    svgPanZoom(_svg);
   };
   this.plot = _plot;
 };
