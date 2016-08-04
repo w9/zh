@@ -70,19 +70,20 @@ ZH.ZH = function(el_) {
     _resize();
 
     window.addEventListener('keydown', function(e){
-      console.log(e);
       if (e.ctrlKey) {
         switch (e.key) {
           case '=': _zoom_level = 0; _zoom_factor *= Math.cbrt(2); _resize(); e.preventDefault(); break;
           case '-': _zoom_level = 0; _zoom_factor /= Math.cbrt(2); _resize(); e.preventDefault(); break;
           case '0': _zoom_level = 3; _resize(); e.preventDefault(); break;
         }
-      }
-      switch (e.key) {
-        case '1': _zoom_level = 1; _resize(); break;
-        case '2': _zoom_level = 2; _resize(); break;
-        case '3': _zoom_level = 3; _resize(); break;
-        case '4': _zoom_level = 4; _resize(); break;
+      } else {
+        switch (e.key) {
+          case '1': _zoom_level = 1; _resize(); break;
+          case '2': _zoom_level = 2; _resize(); break;
+          case '3': _zoom_level = 3; _resize(); break;
+          case '4': _zoom_level = 4; _resize(); break;
+          case '0': _zoom_level = 3; _resize(); break;
+        }
       }
     });
 
