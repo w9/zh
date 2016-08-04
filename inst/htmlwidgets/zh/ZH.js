@@ -9,6 +9,7 @@ ZH.ZH = function(el_) {
   el_.classList.add('scrollable');
 
   var _zoom_level = 3;
+  var _zoom_factor;
   var _bbox;
 
   var _container = document.createElement('div');
@@ -17,11 +18,11 @@ ZH.ZH = function(el_) {
 
   var _col_outline = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
   _col_outline.classList.add('zh-outline');
-  _col_outline.hidden = true;
+  _col_outline.setAttribute('visibility', 'visible');
 
   var _row_outline = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
   _row_outline.classList.add('zh-outline');
-  _row_outline.hidden = true;
+  _row_outline.setAttribute('visibility', 'visible');
 
   var _svg;
   var _heatmap;
@@ -32,13 +33,13 @@ ZH.ZH = function(el_) {
     _svg = document.getElementById('zh-svg');
     _svg.appendChild(_row_outline);
     _svg.appendChild(_col_outline);
-    _svg.addEventListener('click', function(e){
-      _row_outline.hidden = true;
-      _col_outline.hidden = true;
+    window.addEventListener('dblclick', function(e){
+      _row_outline.setAttribute('visibility', 'hidden');
+      _col_outline.setAttribute('visibility', 'hidden');
     });
 
     _heatmap = document.getElementById('zh-heatmap');
-    _heatmap.addEventListener('click', function(e){
+    _heatmap.addEventListener('dblclick', function(e){
       let ii = Math.floor(e.offsetX / msg_.pixel_width);
       let jj = Math.floor(e.offsetY / msg_.pixel_height);
 
@@ -46,13 +47,13 @@ ZH.ZH = function(el_) {
       _row_outline.setAttribute('y', -0.5 + jj * msg_.pixel_height);
       _row_outline.setAttribute('width', 1 + msg_.pixel_width * msg_.ncol);
       _row_outline.setAttribute('height', 1 + msg_.pixel_height);
-      _row_outline.hidden = false;
+      _row_outline.setAttribute('visibility', 'visible');
 
       _col_outline.setAttribute('x', -0.5 + ii * msg_.pixel_width);
       _col_outline.setAttribute('y', -0.5);
       _col_outline.setAttribute('width', 1 + msg_.pixel_width);
       _col_outline.setAttribute('height', 1 + msg_.pixel_height * msg_.nrow);
-      _col_outline.hidden = false;
+      _col_outline.setAttribute('visibility', 'visible');
 
       e.stopPropagation();
     });
@@ -76,30 +77,55 @@ ZH.ZH = function(el_) {
         case '4': _zoom_level = 4; _resize(); break;
       }
     });
+
+    window.addEventListener('mousewheel', function(e){
+      if (e.ctrlKey) {
+        _zoom_level = 0;
+        if (e.deltaY < 0) {
+          _zoom_factor *= Math.cbrt(2);
+        } else {
+          _zoom_factor /= Math.cbrt(2);
+        }
+        _resize();
+        e.preventDefault();
+      }
+    });
   };
 
   var _resize = function() {
     switch (_zoom_level) {
+      case 0:
+        _svg.setAttribute('width', _bbox.width * _zoom_factor);
+        _svg.setAttribute('height', _bbox.height * _zoom_factor);
+        break;
+
       case 1:
         _svg.setAttribute('width', _bbox.width);
         _svg.setAttribute('height', _bbox.height);
+        _zoom_factor = 1;
         break;
 
       case 2:
         _svg.setAttribute('width', '100%');
         _svg.setAttribute('height', _bbox.height * _svg.clientWidth / _bbox.width);
         _svg.setAttribute('height', _bbox.height * _svg.clientWidth / _bbox.width);
+        _zoom_factor = _svg.clientHeight / _bbox.height;
         break;
 
       case 3:
         _svg.setAttribute('width', '50%');
         _svg.setAttribute('height', _bbox.height * _svg.clientWidth / _bbox.width);
         _svg.setAttribute('height', _bbox.height * _svg.clientWidth / _bbox.width);
+        _zoom_factor = _svg.clientHeight / _bbox.height;
         break;
 
       case 4:
         _svg.setAttribute('height', '100%');
         _svg.setAttribute('width', _bbox.width * _svg.clientWidth / _bbox.height);
+        _zoom_factor = _svg.clientHeight / _bbox.height;
+        break;
+
+      default:
         break;
     }
   };
