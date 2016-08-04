@@ -8,6 +8,8 @@ ZH.MARGIN = 20;
 ZH.ZH = function(el_) {
   el_.classList.add('scrollable');
 
+  var _zoom_level = 3;
+
   var _container = document.createElement('div');
   _container.id = 'zh-container';
   el_.appendChild(_container);
@@ -67,20 +69,39 @@ ZH.ZH = function(el_) {
     svg.setAttribute('height', '100%');
 
     window.addEventListener('keydown', function(e){
-      if (e.key == '1') {
-        svg.setAttribute('width', bbox.width);
-        svg.setAttribute('height', bbox.height);
-      } else if (e.key == '2') {
-        svg.setAttribute('width', '100%');
-        svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
-      } else if (e.key == '3') {
-        svg.setAttribute('width', '50%');
-        svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
-      } else if (e.key == '4') {
-        svg.setAttribute('height', '100%');
-        svg.setAttribute('width', bbox.width * svg.clientWidth / bbox.height);
+      switch (e.key) {
+        case '1': _zoom_level = 1; _resize(); break;
+        case '2': _zoom_level = 2; _resize(); break;
+        case '3': _zoom_level = 3; _resize(); break;
+        case '4': _zoom_level = 4; _resize(); break;
       }
     });
   };
+
+  var _resize = function() {
+    switch (_zoom_level) {
+      case 1:
+        svg.setAttribute('width', bbox.width);
+        svg.setAttribute('height', bbox.height);
+        break;
+
+      case 2:
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
+        break;
+
+      case 3:
+        svg.setAttribute('width', '50%');
+        svg.setAttribute('height', bbox.height * svg.clientWidth / bbox.width);
+        break;
+
+      case 4:
+        svg.setAttribute('height', '100%');
+        svg.setAttribute('width', bbox.width * svg.clientWidth / bbox.height);
+        break;
+    }
+  };
+
   this.plot = _plot;
+  this.resize = _resize;
 };

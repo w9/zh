@@ -16,7 +16,11 @@ HTMLWidgets.widget({
 
       },
 
-      resize: function(width, height) { }
+      resize: function(width, height) {
+
+        zh.resize();
+
+      }
 
     };
   }
