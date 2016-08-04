@@ -29,6 +29,10 @@ ZH.ZH = function(el_) {
     _svg = document.getElementById('zh-svg');
     _svg.appendChild(_row_outline);
     _svg.appendChild(_col_outline);
+    _svg.addEventListener('click', function(e){
+      _row_outline.hidden = true;
+      _col_outline.hidden = true;
+    });
 
     _heatmap = document.getElementById('zh-heatmap');
     _heatmap.addEventListener('click', function(e){
@@ -41,11 +45,13 @@ ZH.ZH = function(el_) {
       _row_outline.setAttribute('height', 1 + msg_.pixel_height);
       _row_outline.hidden = false;
 
-      _col_outline.setAttribute('x', -0.5 + ii * msg_.pixel_height);
+      _col_outline.setAttribute('x', -0.5 + ii * msg_.pixel_width);
       _col_outline.setAttribute('y', -0.5);
       _col_outline.setAttribute('width', 1 + msg_.pixel_width);
-      _col_outline.setAttribute('height', 1 + msg_.pixel_height * msg_.ncol);
+      _col_outline.setAttribute('height', 1 + msg_.pixel_height * msg_.nrow);
       _col_outline.hidden = false;
+
+      e.stopPropagation();
     });
     
     // aways crop the svg to the bounding box plus a margin
@@ -55,10 +61,18 @@ ZH.ZH = function(el_) {
     bbox.y -= ZH.MARGIN;
     bbox.width += 2 * ZH.MARGIN;
     bbox.height += 2 * ZH.MARGIN;
+
     svg.setAttribute('viewBox', [bbox.x, bbox.y, bbox.width, bbox.height].join(' '));
     svg.setAttribute('width', el_.clientWidth);
     svg.setAttribute('height', el_.clientHeight);
-    svgPanZoom(_svg, { maxZoom: Infinity });
+    let _pan_zoom = svgPanZoom(_svg, { maxZoom: Infinity });
+
+    window.addEventListener('keydown', function(e){
+      if (e.key == 'Home') {
+        svg.setAttribute('viewBox', [bbox.x, bbox.y, bbox.width, bbox.y].join(' '));
+        _pan_zoom.reset();
+      }
+    });
   };
   this.plot = _plot;
 };
