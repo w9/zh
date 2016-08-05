@@ -7,6 +7,7 @@ ZH.MARGIN = 20;
 
 ZH.ZH = function(el_) {
   el_.classList.add('scrollable');
+  el_.setAttribute('tabindex', -1);
 
   var _zoom_level = 3;
   var _zoom_factor;
@@ -69,7 +70,7 @@ ZH.ZH = function(el_) {
     _svg.setAttribute('viewBox', [_bbox.x, _bbox.y, _bbox.width, _bbox.height].join(' '));
     _resize();
 
-    setTimeout(() => el_.focus(), 1);
+    el_.focus();
 
     window.addEventListener('keydown', function(e){
       if (e.ctrlKey) {
