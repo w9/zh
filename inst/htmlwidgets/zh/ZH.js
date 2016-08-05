@@ -86,6 +86,15 @@ ZH.ZH = function(el_) {
           case '3': _zoom_level = 3; _resize(); break;
           case '4': _zoom_level = 4; _resize(); break;
           case '0': _zoom_level = 3; _resize(); break;
+
+          case 'g': el_.scrollTop = 0; break;
+          case 'G': el_.scrollTop = el_.scrollHeight; break;
+          case 'j': el_.scrollTop += 50; break;
+          case 'k': el_.scrollTop -= 50; break;
+          case 'd': el_.scrollTop += el_.clientHeight/2; break;
+          case 'u': el_.scrollTop -= el_.clientHeight/2; break;
+          case 'f': el_.scrollTop += el_.clientHeight; break;
+          case 'b': el_.scrollTop -= el_.clientHeight; break;
         }
       }
     });
