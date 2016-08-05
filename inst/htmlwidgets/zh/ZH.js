@@ -69,7 +69,7 @@ ZH.ZH = function(el_) {
     _svg.setAttribute('viewBox', [_bbox.x, _bbox.y, _bbox.width, _bbox.height].join(' '));
     _resize();
 
-    el_.focus();
+    setTimeout(() => el_.focus(), 1);
 
     window.addEventListener('keydown', function(e){
       if (e.ctrlKey) {
