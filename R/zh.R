@@ -1,4 +1,15 @@
-# TODO: by default show the entire thing and click to zoom in
+cubehelix <- function (start = 0.5, r = -1.5, hue = 1, gamma = 1) {
+  M <- matrix(c(-0.14861, -0.29227, 1.97294, 1.78277, -0.90649, 0), ncol = 2)
+  return(function(lambda){
+    l   <- rep(lambda^gamma, each = 3)
+    phi <- 2 * pi * (start/3 + r * lambda)
+    t   <- rbind(cos(phi), sin(phi))
+    out <- l + hue * l * (1 - l)/2 * (M %*% t)
+    out <- pmin(pmax(out, 0), 1)
+    out <- apply(out, 2, function(x) rgb(x[1], x[2], x[3]))
+    return(out)
+  })
+}
 
 #' ZH: Fast heatmap plotter as an HTML widget
 #'
@@ -49,7 +60,8 @@ zh <-
     )
   {
     col_mapper <- col_numeric(c('#132B43', '#56B1F7'), c(min(mat), max(mat)))
-    
+    # col_mapper <- . %>% rescale %>% {Vectorize(cubehelix())(.)}
+
     d_names_list <- dimnames(mat)
     d_names <- names(d_names_list)
     row_names <- d_names_list[[1]]
